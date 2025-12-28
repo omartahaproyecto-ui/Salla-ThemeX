@@ -21,6 +21,7 @@
         "component-square-photos",
         "component-store-features",
         "component-youtube",
+        "component-ecommerce-slider",
         "menu-images",
         "filters"
     ],
@@ -1046,6 +1047,40 @@
                     "required": false,
                     "minLength": 1,
                     "maxLength": 30
+                }
+            ]
+        },
+        {
+            "key": "ecommerce-slider-component",
+            "title": {
+                "en": "E-commerce Image Slider",
+                "ar": "سليدر صور التجارة الإلكترونية"
+            },
+            "icon": "sicon-image-carousel",
+            "path": "home.ecommerce-slider",
+            "fields": [
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "static-desc",
+                    "value": "<div><img class='w-full' src='https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=60'></div>"
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-format-text-alt",
+                    "label": "Section Title",
+                    "multilanguage": true,
+                    "id": "title",
+                    "value": {
+                        "ar": "معرض التجارة الإلكترونية",
+                        "en": "E-commerce Showcase"
+                    },
+                    "required": false,
+                    "format": "text",
+                    "description": null,
+                    "placeholder": "Enter section title...",
+                    "minLength": 0,
+                    "maxLength": 100
                 }
             ]
         }

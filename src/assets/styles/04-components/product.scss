@@ -251,6 +251,47 @@
 
 .s-product{
     &-card{
+      &-entry {
+        @apply bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden;
+        
+        .s-product-card-image {
+          @apply relative overflow-hidden;
+          
+          img {
+            @apply w-full h-48 object-cover;
+          }
+        }
+        
+        .s-product-card-content {
+          @apply p-4;
+          
+          .s-product-card-content-main {
+            @apply mb-3;
+            
+            .s-product-card-content-title {
+              @apply text-gray-900 font-medium text-base mb-1 leading-tight;
+              
+              a {
+                @apply text-gray-900 hover:text-gray-700 no-underline;
+              }
+            }
+          }
+          
+          .s-product-card-content-sub {
+            @apply flex items-center justify-between;
+            
+            .s-product-card-price,
+            .s-product-card-sale-price h4 {
+              @apply text-red-500 font-semibold text-lg #{!important};
+            }
+          }
+          
+          .s-product-card-content-footer {
+            @apply mt-3;
+          }
+        }
+      }
+      
       &-full-image salla-add-product-button {
         @apply bg-white rounded;
       }

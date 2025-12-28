@@ -1,0 +1,131 @@
+{#
+| Variable         | Type       | Description                                                         |
+|------------------|------------|---------------------------------------------------------------------|
+| position         | int        | sorting block                                                       |
+#}
+{% set component_id='ecommerce-slider-' ~ (position ?? 1) %}
+<section class="s-block ecommerce-image-slider container" id="{{ component_id }}">
+    <div class="s-block__title">
+        <div class="right-side">
+            <h2>{{ trans('pages.home.ecommerce_showcase') ?? 'E-commerce Showcase' }}</h2>
+        </div>
+    </div>
+    
+    <div class="ecommerce-slider-wrapper">
+        <div class="ecommerce-slider" id="ecommerce-slider-{{ component_id }}">
+            <!-- Slide 1: Online Shopping -->
+            <div class="ecommerce-slide">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" 
+                     alt="Online Shopping" 
+                     loading="lazy">
+                <div class="slide-overlay">
+                    <h3>Online Shopping Experience</h3>
+                    <p>Discover the future of retail</p>
+                </div>
+            </div>
+            
+            <!-- Slide 2: Shopping Bags -->
+            <div class="ecommerce-slide">
+                <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" 
+                     alt="Shopping Bags" 
+                     loading="lazy">
+                <div class="slide-overlay">
+                    <h3>Premium Shopping</h3>
+                    <p>Quality products, delivered</p>
+                </div>
+            </div>
+            
+            <!-- Slide 3: E-commerce Technology -->
+            <div class="ecommerce-slide">
+                <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" 
+                     alt="Digital Commerce" 
+                     loading="lazy">
+                <div class="slide-overlay">
+                    <h3>Digital Commerce</h3>
+                    <p>Technology meets retail</p>
+                </div>
+            </div>
+            
+            <!-- Slide 4: Mobile Shopping -->
+            <div class="ecommerce-slide">
+                <img src="https://images.unsplash.com/photo-1512818994611-83ba6ad8dc93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" 
+                     alt="Mobile Shopping" 
+                     loading="lazy">
+                <div class="slide-overlay">
+                    <h3>Shop Anywhere</h3>
+                    <p>Mobile commerce made easy</p>
+                </div>
+            </div>
+            
+            <!-- Slide 5: Retail Store -->
+            <div class="ecommerce-slide">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" 
+                     alt="Retail Experience" 
+                     loading="lazy">
+                <div class="slide-overlay">
+                    <h3>Retail Excellence</h3>
+                    <p>Where shopping meets style</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation buttons -->
+        <button class="ecommerce-slider-nav ecommerce-slider-prev" onclick="moveSlide(-1, '{{ component_id }}')" aria-label="Previous slide">
+            <i class="sicon-keyboard_arrow_left"></i>
+        </button>
+        <button class="ecommerce-slider-nav ecommerce-slider-next" onclick="moveSlide(1, '{{ component_id }}')" aria-label="Next slide">
+            <i class="sicon-keyboard_arrow_right"></i>
+        </button>
+        
+        <!-- Dots indicator -->
+        <div class="ecommerce-slider-dots">
+            <span class="dot active" onclick="currentSlide(1, '{{ component_id }}')"></span>
+            <span class="dot" onclick="currentSlide(2, '{{ component_id }}')"></span>
+            <span class="dot" onclick="currentSlide(3, '{{ component_id }}')"></span>
+            <span class="dot" onclick="currentSlide(4, '{{ component_id }}')"></span>
+            <span class="dot" onclick="currentSlide(5, '{{ component_id }}')"></span>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let slideIndex = 1;
+    const componentId = '{{ component_id }}';
+    
+    window.moveSlide = function(n, id) {
+        if (id !== componentId) return;
+        showSlide(slideIndex += n);
+    }
+    
+    window.currentSlide = function(n, id) {
+        if (id !== componentId) return;
+        showSlide(slideIndex = n);
+    }
+    
+    function showSlide(n) {
+        const slides = document.querySelectorAll(`#ecommerce-slider-${componentId} .ecommerce-slide`);
+        const dots = document.querySelectorAll(`#${componentId} .dot`);
+        
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        
+        slides.forEach(slide => slide.style.display = 'none');
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        if (slides[slideIndex - 1]) {
+            slides[slideIndex - 1].style.display = 'block';
+        }
+        if (dots[slideIndex - 1]) {
+            dots[slideIndex - 1].classList.add('active');
+        }
+    }
+    
+    showSlide(slideIndex);
+    
+    // Auto-advance slides every 5 seconds
+    setInterval(() => {
+        moveSlide(1, componentId);
+    }, 5000);
+});
+</script>
